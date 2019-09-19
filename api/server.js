@@ -1,14 +1,23 @@
-const express = require("express");
-const server = express();
+const express = require('express');
 
-// const UserRouter = require("../users/user-router.js");
+const Users = require('../users/user-model.js');
+
+const server = express();
 
 server.use(express.json());
 
-// server.use("/api/users", UserRouter);
+server.get('/', (req, res) => {
+  res.status(200).json({ api: 'up' });
+});
 
-server.get("/", (req, res) => {
-  res.status(200).json({ api: "connected" });
+server.get('/users', (req, res) => {
+  Users.getAll()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
 });
 
 module.exports = server;
