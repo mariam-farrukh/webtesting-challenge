@@ -9,26 +9,21 @@ module.exports = {
 };
 
 function insert(user) {
-//   return db('users').insert(user, 'id');
-  return null;
+  return db('users').insert(user, 'id');
 }
 
 function findById(id) {
-//   return db('users').where({ id });
-  return null;
+  return db('users').where({ id });
 }
 
 function update(changes, id) {
-//   return db('users').where({ id }).update(changes);
-  return null;
+  return db('users').where({ id }).update(changes);
 }
 
 function remove(id) {
-//   return db('users').where({ id }).delete(id);
-  return null;
+  return db('users').where({ id }).delete(id);
 }
 
 function getAll() {
-//   return db('users');
-  return null;
+  return db('users');
 }
