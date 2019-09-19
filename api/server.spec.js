@@ -34,14 +34,15 @@ describe('server.js', () => {
                 .then(res => {
                     expect(res.status).toBe(200);
                 })
-        })
+        });
+
         it('return JSON', () => {
             return request(server)
                 .get('/')
                 .then(res => {
                     expect(res.type).toMatch(/json/);
                 })
-        })
+        });
     })
 
     describe('GET /users', () => {
@@ -51,8 +52,8 @@ describe('server.js', () => {
                 .then(res => {
                     expect(Array.isArray(res.body)).toBe(true);
                 })
-        })
-    })
+        });
+    });
 
     describe('POST /users', () => {
         beforeEach(async() => {
@@ -67,27 +68,31 @@ describe('server.js', () => {
             })
             .then(res => {
                 expect(res.body.length).toBe(1)
+            })
+        });
+
+        it('returns 201 OK', () => {
+            return request(server)
+                .post('/users')
+                .send({
+                    name:'singer'
                 })
-        })
+                .then(res => {
+                    expect(res.status).toBe(201);
+                })
+        });
+
         it('should insert more than one user' ,async() => {
             await request(server).post('/users')
             .send([
-                {
-                    name:'test',
-                },
-                {
-                    name: 'potato'
-                },
-                {
-                    name: 'heimer'
-                }
+                {name:'test'},
+                {name: 'potato'},
+                {name: 'heimer'}
             ])
             const users = await db('users');
             expect(users).toHaveLength(3);
-        })
-
-        
-    })
+        });
+    });
 
     describe('PUT request', () => {
         it('should update a name', () => {            
@@ -99,8 +104,8 @@ describe('server.js', () => {
             .then(res => {
                 expect(res.status).toBe(200);
             })
-        })
-    })
+        });
+    });
 
     describe("DELETE request", ()=>{
         it("successful delete user by ID", ()=>{
@@ -117,5 +122,5 @@ describe('server.js', () => {
                     done()
                 })
         });
-    })
+    });
 });
