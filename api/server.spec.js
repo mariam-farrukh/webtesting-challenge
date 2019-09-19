@@ -119,7 +119,7 @@ describe('server.js', () => {
             request(server).delete('/users/1')
                 .then(res => {
                     expect(res.type).toMatch(/json/i);
-                    done()
+                    done();
                 })
         });
     });
